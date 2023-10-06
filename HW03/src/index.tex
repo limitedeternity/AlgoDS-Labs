@@ -13,7 +13,7 @@
 \begin{problem}
     Даны два отсортированных массива $a$ и $b$ длины $n$, сгенерировать все попарные суммы $a_i + b_j$
     в сортированном порядке.
-    \begin{enumerate}
+    \begin{enumerate}[a)]
         \item За время $O(n^2 \log n)$.
         \item За время $O(n^3)$ с использованием $O(n)$ дополнительной памяти.
         \item \texttt{[Дополнительная задача]} За время $O(n^3)$ с использованием $O(1)$ дополнительной памяти.
@@ -21,7 +21,11 @@
 \end{problem}
 
 \begin{solution}
-    \dots
+    \leavevmode\vspace{1pt}
+    \begin{enumerate}[a)]
+        \item
+        \lstinputlisting[language=Python,title={Задача 2(a). Реализация на Python}]{code/Task_2a.py}
+    \end{enumerate}
 \end{solution}
 
 
@@ -31,12 +35,14 @@
 \end{problem}
 
 \begin{solution}
-    \dots
+    \leavevmode\vspace{1pt}
+    \lstinputlisting[language=Python,title={Задача 3. Реализация на Python}]{code/Task_3.py}
 \end{solution}
 
 
 \begin{problem}
-    \begin{enumerate}
+    \leavevmode\vspace{1pt}
+    \begin{enumerate}[a)]
         \item Покажите, как реализовать слияние $k$ отсортированных массивов суммарной длины $n$ в один отсортированный массив за время $O(n \log k)$.
         \item Оцените время работы сортировки слиянием, разбивающей каждый раз массив не на две части, а на $k$.
     \end{enumerate}
