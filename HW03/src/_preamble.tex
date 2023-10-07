@@ -38,11 +38,65 @@
 {\renewcommand\qedsymbol{$\blacksquare$}\begin{proof}[Решение]}
 {\end{proof}}
 
-\begin{document}
-    \definecolor{dkgreen}{rgb}{0,0.6,0}
-    \definecolor{gray}{rgb}{0.5,0.5,0.5}
-    \definecolor{mauve}{rgb}{0.58,0,0.82}
+\definecolor{dkviolet}{rgb}{0.3, 0.0, 0.5}
+\definecolor{dkgreen}{rgb}{0.09, 0.45, 0.27}
+\definecolor{ltblue}{rgb}{0.0, 0.4, 0.4}
+\definecolor{dkblue}{rgb}{0.0, 0.0, 0.55}
+\definecolor{dkred}{rgb}{0.55, 0.0, 0.0}
+\definecolor{amber}{rgb}{1.0, 0.75, 0.0}
+\definecolor{mauve}{rgb}{0.58, 0.0, 0.82}
 
+\lstdefinelanguage{Coq}{
+    % Vernacular commands
+    morekeywords=[1]{Section, Module, End, Require, Import, Export,
+        Variable, Variables, Parameter, Parameters, Axiom, Hypothesis,
+        Hypotheses, Notation, Local, Tactic, Reserved, Scope, Open, Close,
+        Bind, Delimit, Definition, Let, Ltac, Fixpoint, CoFixpoint, Add,
+        Morphism, Relation, Implicit, Arguments, Unset, Contextual,
+        Strict, Prenex, Implicits, Inductive, CoInductive, Record,
+        Structure, Canonical, Coercion, Context, Class, Global, Instance,
+        Program, Infix, Theorem, Lemma, Corollary, Proposition, Fact,
+        Remark, Example, Proof, Goal, Save, Qed, Defined, Hint, Resolve,
+        Rewrite, View, Search, Show, Print, Printing, All, Eval, Check,
+        Projections, inside, outside, Def},
+    % Gallina
+    morekeywords=[2]{forall, exists, exists2, fun, fix, cofix, struct,
+        match, with, end, as, in, return, let, if, is, then, else, for, of,
+        nosimpl, when},
+    % Sorts
+    morekeywords=[3]{Type, Prop, Set, true, false, option},
+    % Various tactics, some are std Coq subsumed by ssr, for the manual purpose
+    morekeywords=[4]{pose, set, move, case, elim, apply, clear, hnf,
+        intro, intros, generalize, rename, pattern, after, destruct,
+        induction, using, refine, inversion, injection, rewrite, congr,
+        unlock, compute, ring, field, fourier, replace, fold, unfold,
+        change, cutrewrite, simpl, have, suff, wlog, suffices, without,
+        loss, nat_norm, assert, cut, trivial, revert, bool_congr, nat_congr,
+        symmetry, transitivity, auto, split, left, right, autorewrite},
+    % Terminators
+    morekeywords=[5]{by, done, exact, reflexivity, tauto, romega, omega,
+        assumption, solve, contradiction, discriminate},
+    % Control
+    morekeywords=[6]{do, last, first, try, idtac, repeat},
+    % String delimiters
+    morestring=[b]",
+    % Style for (listings') identifiers
+    identifierstyle={\ttfamily\color{black}},
+    % Style for declaration keywords
+    keywordstyle=[1]{\ttfamily\color{dkviolet}},
+    % Style for gallina keywords
+    keywordstyle=[2]{\ttfamily\color{dkgreen}},
+    % Style for sorts keywords
+    keywordstyle=[3]{\ttfamily\color{ltblue}},
+    % Style for tactics keywords
+    keywordstyle=[4]{\ttfamily\color{dkblue}},
+    % Style for terminators keywords
+    keywordstyle=[5]{\ttfamily\color{dkred}},
+    % Style for iterators
+    keywordstyle=[6]{\ttfamily\color{amber}},
+}[keywords,comments,strings]
+
+\begin{document}
     \newcommand{\problemset}[1]{
 
         \begin{center}
@@ -77,7 +131,7 @@
         extendedchars=true,
         literate={*}{{\char42}}1 {-}{{\char45}}1,
         texcl=true,
-        keywordstyle=\color{blue},      % keyword style
+        keywordstyle=\color{dkviolet},  % keyword style
         commentstyle=\color{dkgreen},   % comment style
         stringstyle=\color{mauve},      % string literal style
     }
