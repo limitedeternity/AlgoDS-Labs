@@ -16,7 +16,40 @@
 \end{problem}
 
 \begin{solution}
-    \dots
+    \medskip\noindent
+
+    \begin{enumerate}[a)]
+        \item
+            Можно использовать сортировку вставками. Поскольку индекс каждого элемента будет двигаться
+            не более, чем на k позиций, то сложность алгоритма снизится с $O(n^2)$ до $O(nk)$.
+
+        \item
+            \dots
+
+        \item
+            Алгоритмы сортировки, использующие не более $h$ сравнений при любых входных данных, соотносятся
+            с деревьями, высота которых не более $h$. У таких деревьев не более $2^h$ листьев.
+
+            Помимо этого, каждая перестановка $1,\dots,N$ должна порождать отдельный лист, так что
+            в итоге должно получиться не менее $N!$ листьев.
+
+            Следовательно, $2^h \ge N! \Rightarrow h \ge \log{N!}$ и, используя формулу Стирлинга, получаем
+            $\log{N!} = N \log N - N \log e + O(\log N) = \Omega(N \log N)$.
+
+            В нашем случае, поскольку у нас <<почти отсортированный>> массив, на сортировку уйдёт $\Omega(N \log k)$.
+
+        \item
+            \begin{enumerate}[1.]
+                \item Создать min-heap
+                \item Зарезервировать память под отсортированный массив (\texttt{result})
+                \item Вставить первые $k + 1$ элементов из входного массива в min-heap
+                \item Извлечь минимальный элемент из min-heap за $O(\log k)$ и добавить в \texttt{result}
+                \item Вставить следующий элемент из входного массива в min-heap
+                \item Повторять шаги 4 и 5, пока входной массив не закончится
+                \item Извлечь оставшиеся элементы из min-heap и добавить их в \texttt{result}
+                \item Вернуть \texttt{result}
+            \end{enumerate}
+    \end{enumerate}
 \end{solution}
 
 
@@ -25,7 +58,11 @@
 \end{problem}
 
 \begin{solution}
-    \dots
+    \medskip\noindent
+
+    \begin{figure}[!ht]
+        \includegraphics{Render-Task2}
+    \end{figure}
 \end{solution}
 
 
@@ -54,12 +91,57 @@ node *merge(node *h1, node *h2) {
 
     Как можно заметить, такая реализация работает только если все элементы в куче \texttt{h2} больше определенных
     элементов в \texttt{h1}. Модифицируйте реализацию так, чтобы она стала корректной вне зависимости от отношений
-    между элементами \texttt{h1} и \texttt{h2} (время работы должно остаться $O(n \log n)$. \\\\
+    между элементами \texttt{h1} и \texttt{h2} (время работы должно остаться $O(n \log n)$. \\
     {\footnotesize Визуализацию можно посмотреть \href{https://www.cs.usfca.edu/~galles/visualization/LeftistHeap.html}{здесь}}
 \end{problem}
 
 \begin{solution}
-    \dots
+    \medskip\noindent
+
+    \begin{lstlisting}
+node* merge(node* h1, node* h2)
+{
+    if (!h1)
+    {
+        return h2;
+    }
+
+    if (!h2)
+    {
+        return h1;
+    }
+
+    if (h1->value < h2->value)
+    {
+        return merge_internal(h1, h2);
+    }
+    else
+    {
+        return merge_internal(h2, h1);
+    }
+}
+
+static node* merge_internal(node* h1, node* h2)
+{
+    if (!h1->left)
+    {
+        h1->left = h2;
+    }
+    else
+    {
+        h1->right = merge(h1->right, h2);
+
+        if (h1->left->rank < h1->right->rank)
+        {
+            std::swap(h1->left, h1->right);
+        }
+
+        h1->rank = h1->right->rank + 1;
+    }
+
+    return h1;
+}
+    \end{lstlisting}
 \end{solution}
 
 
@@ -74,7 +156,11 @@ node *merge(node *h1, node *h2) {
 \end{problem}
 
 \begin{solution}
-    \dots
+    \medskip\noindent
+
+    Эта структура~-- очередь с приоритетами на базе кучи.
+    Вставка и удаление выполняются за $O(\log{n})$, а смену приоритета можно реализовать как удаление + вставка,
+    что будет выполняться за $O(2\cdot\log{n}) = O(\log{n})$.
 \end{solution}
 
 

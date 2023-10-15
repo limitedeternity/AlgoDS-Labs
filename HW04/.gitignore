@@ -1,2 +1,3 @@
 *.pdf
+!/src/images/*.pdf
 *.synctex.gz
