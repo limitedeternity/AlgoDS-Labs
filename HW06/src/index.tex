@@ -1,0 +1,107 @@
+\problemset{Домашнее задание}
+
+\begin{problem}
+    Даны две последовательности: $\mathtt{A}$ длины $n$ и $\mathtt{B}$ длины $m$. Известно, что все элементы
+    последовательности $\mathtt{B}$ различны. Найдите НОП этих последовательностей за время $O(n \log n)$.
+\end{problem}
+
+\begin{solution}
+    Для решения этой задачи подойдет \href{https://dl.acm.org/doi/pdf/10.1145/359581.359603}{алгоритм Ханта-Шиманского}.
+\end{solution}
+
+
+\begin{problem}
+    Найти максимальное по весу (веса стоят на ребрах) паросочетание за $O(n)$ на:
+    \begin{enumerate}[(a)]
+        \item дереве из $n$ вершин,
+        \item простом цикле из $n$ вершин,
+        \item связном неориентированном графе из $n$ вершин и $n$ рёбер.
+    \end{enumerate}
+\end{problem}
+
+\begin{solution}
+    \medskip\noindent
+    \begin{displayquote}
+        <<Cygan et al. (2012) recently showed that MWPM on general graphs is solvable in $O(N \cdot n^{\omega})$ time,
+        matching the time bound of Sankowski (2009) for bipartite graphs <...>, where $\omega$ is the exponent of
+        square [$n \times n$] matrix multiplication <...> [and] $N$ is the maximum integer edge weight>>.
+        (Duan, R., \& Pettie, S., 2014)
+    \end{displayquote}
+
+    За линейное время возможно выполнить только аппроксимацию (MWM), как это показано в
+    \href{https://web.eecs.umich.edu/~pettie/papers/ApproxMWM-JACM.pdf}{оригинальной статье}. Точный расчёт (MWPM) в
+    общем случае возможно выполнить за $O(N \cdot n^{\omega})$, как было доказано в
+    \href{https://web.eecs.umich.edu/~pettie/matching/Cygan-Gabow-Sankowski-general-mincost-matching-matrix-mult.pdf}{этой
+    статье}.
+\end{solution}
+
+
+\begin{problem}
+    Два игрока играют в игру на массиве длины $n$. За ход можно забрать себе одно из крайних чисел. Определите максимальную сумму, которую может себе обеспечить каждый из игроков при оптимальной игре, за время $O(n^3)$.
+\end{problem}
+
+\begin{solution}
+    Обозначим собранные игроком монеты как положительный вклад в его сумму, а собранные противником - как отрицательный.
+    Тогда задача состоит в максимизации суммы.
+
+    Положим, $\mathtt{dp[i][j]}$ -- максимальная сумма, которую может получить игрок на подмассиве $\mathtt{[i...j]}$.
+    Тогда $\mathtt{dp[i][j]} = max(\mathtt{arr[i]} - \mathtt{dp[i + 1][j]}, \mathtt{arr[j]} - \mathtt{dp[i][j - 1])}$,
+    потому что:
+
+    \begin{itemize}
+        \item Если мы выберем крайний левый элемент, то получим сумму, равную $\mathtt{arr[i]}$ минус максимальная сумма,
+            которую может получить противник на подмассиве $\mathtt{[(i + 1)...j]}$.
+        \item Аналогично, выбрав крайний правый элемент, мы получим сумму, равную $\mathtt{arr[j]}$ минус максимальная
+            сумма, которую может получить противник на подмассиве $\mathtt{[i...(j - 1)]}$.
+    \end{itemize}
+
+    Результат будет в $\mathtt{dp[0][n - 1]}$, однако нужно учесть отрицательный вклад противника. Пусть результат -- $V =
+    \mathtt{dp[0][n - 1]}$, а сумма всех монет -- $S$. Тогда формула $(S + V) / 2$ позволит восстановить правильный ответ.
+
+    Временная сложность решения -- $O(n^2)$.
+
+    \lstinputlisting[language=Python,title={Задача 3. Реализация на Python}]{source/Task_3.py}
+\end{solution}
+
+
+\begin{problem}
+    Даны $n$ предметов, у каждого есть своя стоимость $c_i$. Требуется разбить предметы на две группы с наиболее близкими суммарными стоимостями за $O(nC)$ времени, где $C = \sum\limits_{i = 1}^n c_i$.
+\end{problem}
+
+\begin{solution}
+    \dots
+\end{solution}
+
+
+\subsection*{Дополнительные задачи}
+
+\begin{problem}
+    Найти максимальное по весу паросочетание на кактусе за
+    $O(n)$. Кактус~-- граф, в котором каждое ребро лежит не более чем на одном простом цикле.
+\end{problem}
+
+\begin{solution}
+    \dots
+\end{solution}
+
+
+\begin{problem}
+    {\bf Профессор и железные яйца.}
+    У профессора есть $k$ яиц и $n$ этажное здание. Он хочет узнать максимальный этаж, что если бросить с него яйцо, оно не разобьётся. Неразбившиеся яйца можно переиспользовать. Минимизировать число бросков в худшем случае. Время работы решения:
+    \begin{enumerate}
+        \item $O(n^2k)$
+        \item $O(nk\log n)$
+        \item $O(nk)$
+        \item $O(n \log n)$
+        \item $o(n)$
+        \item \textbf{\textit{(*)}} Решите для заоблачных зданий $k, n \le 10^9$.
+    \end{enumerate}
+    {\footnotesize \textit{Все пункты стоят по $0.5$ баллов}}
+\end{problem}
+
+\begin{solution}
+    \dots
+\end{solution}
+
+
+\clearpage
