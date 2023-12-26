@@ -50,7 +50,7 @@ public:
 
     void print_answer() const
     {
-        for (auto color : colors)
+        for (const auto color : colors)
         {
             std::cout << color << ' ';
         }
