@@ -229,7 +229,26 @@
 \end{problem}
 
 \begin{solution}
-    \ldots
+    \leavevmode\vspace{1pt}
+
+    \begin{enumerate}[(a)]
+        \item Из посылки $f(n) = O(g(n))$:
+            \begin{enumerate}[1.]
+                \item $\Rightarrow f(n) \le c \cdot g(n)$
+                \item $\Rightarrow \log(f(n)) \le \log(c \cdot g(n))$
+                    \aside{Поскольку $\log(x)$ -- возрастающая функция}
+                \item $\Rightarrow \log(f(n)) \le \log(c) + \log(g(n))$
+                \item $\Rightarrow \log(f(n)) \le \log(c) \cdot \log(g(n)) + \log(g(n))$
+                    \aside{Поскольку $g(n) > 1 \Rightarrow \log(g(n)) \ge 1$}
+                \item $\Rightarrow \log(f(n)) \le (\log(c) + 1) \cdot \log(g(n))$
+                \item $\Rightarrow \log(f(n)) = O(\log(g(n)))$.
+                \qedsymbol
+            \end{enumerate}
+
+        \item Контрпример: для $f(n) = 2n$ и $g(n) = n$ следствие не будет выполняться.
+
+            Очевидно, что $2n = O(n)$, однако $2^{2n} = 4^{n}$, а $4^{n} \neq O(2^{n})$.
+    \end{enumerate}
 \end{solution}
 
 
